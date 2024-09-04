@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="font-bold text-3xl">{% block title %} Users {% endblock %}</h1>
+
+    <form action="/users" method="post" class="bg-gray-50 w-1/2 p-4 mx-auto rounded-lg shadow mb-8">
+        <div class="flex flex-col gap-1">
+            <label for="name">Nombre:</label>
+            <input class="w-full bg-white rounded-lg px-2 py-0.5 border border-gray-300 outline-none" type="text" id="name" name="name" required>
+        </div>
+        <div class="flex flex-col gap-1">
+            <label for="email">Correo:</label>
+            <input class="w-full bg-white rounded-md px-2 py-0.5 border border-gray-300 outline-none" type="email" id="email" name="email" required>
+        </div>
+        <button class="block mt-3 w-full bg-blue-600 text-white rounded-lg py-1 font-semibold" type="submit">Guardar</button>
+    </form>
+
+    <p>NOTA: Se dejo el update en la misma página, normalmente estos inputs se mandarian a otra página</p>
+    <table class="table-auto w-full bg-gray-50 rounded-lg mt-4 shadow">
+        <thead class="rounded-lg">
+            <tr>
+                <th class="p-2 text-left border-b border-gray-300">Id</th>
+                <th class="p-2 text-left border-b border-gray-300">Nombre</th>
+                <th class="p-2 text-left border-b border-gray-300">Correo</th>
+                <th class="p-2 text-left border-b border-gray-300">Fecha de creacion</th>
+                <th class="p-2 text-left border-b border-gray-300">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr class='user-row' data-id="{{ user[0] }}">
+                    <td class="p-2">{{ user[0] }}</td>
+                    <td class="p-2">{{ user[1] }} </td>
+                    <td class="p-2">{{ user[2] }} </td>
+                    <td class="p-2">{{ user[3] }} </td>
+                    <td>
+                        <a href="/users/update/{{ user[0] }}" class="text-blue-600 font-semibold">Actualizar</a>
+                        <form action="/users/delete/{{ user[0] }}" method="post" style="display:inline;">
+                            <button type="submit" data-id="{{ user[0] }}" class="text-red-600 font-semibold">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

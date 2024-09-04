@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="font-bold text-3xl">Actualizar Usuario</h1>
+
+    <form action="/users/update/{{ user[0] }}" method="post" class="bg-gray-50 w-1/2 p-4 mx-auto rounded-lg shadow mb-8">
+        <div class="flex flex-col gap-1">
+            <label for="name">Nombre:</label>
+            <input class="w-full bg-white rounded-lg px-2 py-0.5 border border-gray-300 outline-none" 
+                   type="text" id="name" name="name" value="{{ user[1] }}" required>
+        </div>
+        <div class="flex flex-col gap-1">
+            <label for="email">Correo:</label>
+            <input class="w-full bg-white rounded-md px-2 py-0.5 border border-gray-300 outline-none" 
+                   type="email" id="email" name="email" value="{{ user[2] }}" required>
+        </div>
+
+        <button class="block mt-3 w-full bg-blue-600 text-white rounded-lg py-1 font-semibold" type="submit">Actualizar</button>
+    </form>
+{% endblock %}
